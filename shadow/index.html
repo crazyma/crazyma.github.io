@@ -3,17 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Bunun Engineer&#39;s Blog</title>
+  <title>How to remove toolbar shadow 去除 Toolbar 的陰影 | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bunun Engineer's Blog">
-<meta property="og:url" content="http://blog.ma.beibeilab.com/index.html">
+  <meta name="description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:1. 將 AppBarLayout 的 elevation設為 0
+此作法會除掉上下陰影
+123456789101112131415161718192021&amp;lt;andro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to remove toolbar shadow 去除 Toolbar 的陰影">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/shadow/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta property="og:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:1. 將 AppBarLayout 的 elevation設為 0
+此作法會除掉上下陰影
+123456789101112131415161718192021&amp;lt;andro">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-133533.png">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-134158.png">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-135523.png">
+<meta property="og:updated_time" content="2017-04-11T06:25:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bunun Engineer's Blog">
-<meta name="twitter:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta name="twitter:title" content="How to remove toolbar shadow 去除 Toolbar 的陰影">
+<meta name="twitter:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:1. 將 AppBarLayout 的 elevation設為 0
+此作法會除掉上下陰影
+123456789101112131415161718192021&amp;lt;andro">
+<meta name="twitter:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-133533.png">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
   
@@ -66,9 +77,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-shadow" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-shadow" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/shadow/" class="article-date">
   <time datetime="2017-04-11T04:44:17.000Z" itemprop="datePublished">2017-04-11</time>
@@ -85,8 +94,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/shadow/">How to remove toolbar shadow 去除 Toolbar 的陰影</a>
+    <h1 class="article-title" itemprop="name">
+      How to remove toolbar shadow 去除 Toolbar 的陰影
     </h1>
   
 
@@ -119,53 +128,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world-again" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/hello-world-again/" class="article-date">
-  <time datetime="2017-02-25T17:14:16.000Z" itemprop="datePublished">2017-02-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Dev/">Dev</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/hello-world-again/">Hello World Again</a>
-    </h1>
+    <a href="/hello-world-again/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World Again</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>這是第二次要來寫開發部落格，之前的網站已經完全不見了，文章也消失<br>反正那裡面寫的 Android 筆記現在已經沒有用惹 T^T<br><br>有別於第一次是用 Wordpress<br>第一次嘗試使用 <strong>Hexo + github.io</strong> 架設網站<br>會想用這個套件的原因是因為想用 <strong>markdonw</strong> 來寫文章，對工程師來說就是方便<br><br>架起來真很快，但是要搞懂裡面的設定還是需要一點時間<br>(但應該已經輕鬆很多了XD)<br><br>希望這次能夠持續下去喔！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.ma.beibeilab.com/hello-world-again/" data-id="cj1d5wj3l000034vlrpe5d19j" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smalltalk/">smalltalk</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         
