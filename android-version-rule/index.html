@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Bintray | Bunun Engineer&#39;s Blog</title>
+  <title>The Rules of Android VersionName &amp; VersionCode | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bunun Engineer's Blog">
-<meta property="og:url" content="http://blog.ma.beibeilab.com/tags/Bintray/index.html">
+  <meta name="description" content="這篇來記錄我現在採用的 VersionName VersionCode 的規則">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Rules of Android VersionName & VersionCode">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/android-version-rule/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta property="og:description" content="這篇來記錄我現在採用的 VersionName VersionCode 的規則">
+<meta property="og:updated_time" content="2017-05-12T09:50:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bunun Engineer's Blog">
-<meta name="twitter:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta name="twitter:title" content="The Rules of Android VersionName & VersionCode">
+<meta name="twitter:description" content="這篇來記錄我現在採用的 VersionName VersionCode 的規則">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
   
@@ -66,39 +67,80 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/upload-library-to-bintray/" class="archive-article-date">
-  <time datetime="2017-04-12T15:26:42.000Z" itemprop="datePublished">Apr 12</time>
+        <section id="main"><article id="post-android-version-rule" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/android-version-rule/" class="article-date">
+  <time datetime="2017-05-12T09:38:02.000Z" itemprop="datePublished">2017-05-12</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AndroidDev/">AndroidDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/upload-library-to-bintray/">Upload Library to Bintray(JCenter) | 上傳自己的 Library 至 Bintray(JCenter)</a>
+    <h1 class="article-title" itemprop="name">
+      The Rules of Android VersionName &amp; VersionCode
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>這篇來記錄我現在採用的 VersionName VersionCode 的規則<br><a id="more"></a></p>
+<h2 id="Version-Name"><a href="#Version-Name" class="headerlink" title="Version Name"></a>Version Name</h2><p>Version Name 的形式通常會有三組數字組成，例如: <code>2.4.31</code><br>第一個數字稱為 <code>Major</code>: 通常是用在 Project 有大幅度的改版，或是會有無法上下相容的狀況<br>第二個數字稱為 <code>Minor</code>: 表示有新的功能上線，且是上下相容的<br>第三個數字稱為 <code>Patch</code>: 表示有一些錯誤的修正，或是 Config Info 的調整…等等</p>
+<p>另外，因應開發期 &amp; 測試期，會在後面再加上 <code>suffix</code>，例如<br><code>2.4.31-SNAPSHOT</code>: 表示是開發中的版本，這個版本不會對外 Release<br><code>2.4.31-RC2</code>: RC 是 <code>Release Candidates</code>的意思，表示是給別人測試使用的(例如 Google Play 的 Beta 測試版)，後面的數字表示第 n 版的測試</p>
+<h2 id="Version-Code"><a href="#Version-Code" class="headerlink" title="Version Code"></a>Version Code</h2><p>Version Code 是從 Version Name轉換過來，以下是範例：</p>
+<ul>
+<li><code>2.4.31-SNAPSHOT</code> -&gt; <strong>2043100</strong></li>
+<li><code>1.2.3-SNAPSHOT</code> -&gt; <strong>1020300</strong></li>
+<li><code>3.1.85-RC1</code> -&gt; <strong>3018501</strong></li>
+<li><code>2.11.1-RC2</code> -&gt; <strong>2110102</strong></li>
+<li><code>2.4.31</code> -&gt; <strong>2043199</strong></li>
+<li><code>1.11.1</code> -&gt; <strong>1110199</strong></li>
+</ul>
+<p>要注意的是<strong>最後兩個數字</strong></p>
+<ul>
+<li><code>SHANSHOT</code>: <code>00</code>結尾</li>
+<li><code>RCx</code>: <code>x</code>結尾，x = 1~98</li>
+<li><code>Release</code>: <code>99</code>結尾</li>
+</ul>
+<h2 id="後話"><a href="#後話" class="headerlink" title="後話"></a>後話</h2><p>這個規則其實就是參考別人的開發經驗，以及自己的喜好決定的，並沒有硬性規定要怎麼做<br>只要訂定適合自己開發上的規則就可以囉</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://blog.jayway.com/2015/03/11/automatic-versioncode-generation-in-android-gradle/" target="_blank" rel="external">Automatic versionCode generation in Android Gradle</a></li>
+<li><a href="http://semver.org/lang/zh-TW/" target="_blank" rel="external">語意化版本 2.0.0</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.ma.beibeilab.com/android-version-rule/" data-id="cj2lnhmdg00014yvl6i9ub801" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Semantic-Versioning/">Semantic Versioning</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/proguard-rules/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">My ProGuard Rules</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

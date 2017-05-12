@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Bintray | Bunun Engineer&#39;s Blog</title>
+  <title>My ProGuard Rules | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bunun Engineer's Blog">
-<meta property="og:url" content="http://blog.ma.beibeilab.com/tags/Bintray/index.html">
+  <meta name="description" content="通常在 release apk 時，大家都會使用 ProGuard 做基本的混淆有鑒於最近發生混淆之後，app 出現超級難找的 bug於是這篇來記錄一下我自己的 ProGuard Rules">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My ProGuard Rules">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/proguard-rules/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta property="og:description" content="通常在 release apk 時，大家都會使用 ProGuard 做基本的混淆有鑒於最近發生混淆之後，app 出現超級難找的 bug於是這篇來記錄一下我自己的 ProGuard Rules">
+<meta property="og:updated_time" content="2017-04-19T12:18:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bunun Engineer's Blog">
-<meta name="twitter:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta name="twitter:title" content="My ProGuard Rules">
+<meta name="twitter:description" content="通常在 release apk 時，大家都會使用 ProGuard 做基本的混淆有鑒於最近發生混淆之後，app 出現超級難找的 bug於是這篇來記錄一下我自己的 ProGuard Rules">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
   
@@ -66,39 +67,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/upload-library-to-bintray/" class="archive-article-date">
-  <time datetime="2017-04-12T15:26:42.000Z" itemprop="datePublished">Apr 12</time>
+        <section id="main"><article id="post-proguard-rules" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/proguard-rules/" class="article-date">
+  <time datetime="2017-04-15T07:19:13.000Z" itemprop="datePublished">2017-04-15</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AndroidDev/">AndroidDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/upload-library-to-bintray/">Upload Library to Bintray(JCenter) | 上傳自己的 Library 至 Bintray(JCenter)</a>
+    <h1 class="article-title" itemprop="name">
+      My ProGuard Rules
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通常在 release apk 時，大家都會使用 <code>ProGuard</code> 做基本的混淆<br>有鑒於最近發生混淆之後，app 出現超級難找的 bug<br>於是這篇來記錄一下我自己的 <strong>ProGuard Rules</strong><br><a id="more"></a></p>
+<p>基本上因為做了混淆產生 bug，大部分都是因為 Code 涉及到 <a href="https://github.com/JustinSDK/JavaSE6Tutorial/blob/master/docs/CH16.md" target="_blank" rel="external">Reflection 機制</a><br>因為混淆之後，就沒辦法透過 Reflection 動態找到你原本的目標<br>所以你需要設定 proguard rules，讓這些 code 不會被混淆</p>
+<p>我自己開發時，大多是因為使用到<strong>外部 Library</strong> 才導致 code 混淆後出現問題<br>我比較常用的 Library 有： <code>Joda</code>, <code>Okhttp/Okio/Picasso</code>, <code>EventBus</code> &amp; <code>Gson</code><br>以下就是目前我針對這些 Library 統整後的 <code>proguard-rules</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># Joda Time 2.3</div><div class="line">-dontwarn org.joda.convert.**</div><div class="line">-dontwarn org.joda.time.**</div><div class="line">-keep class org.joda.time.** &#123; *; &#125;</div><div class="line">-keep interface org.joda.time.** &#123; *; &#125;</div><div class="line"></div><div class="line"># Okhttp, Okio &amp; picasso</div><div class="line">-dontwarn com.squareup.okhttp.**</div><div class="line">-dontwarn okio.**</div><div class="line"></div><div class="line">#EventBus3</div><div class="line">-keepattributes *Annotation*</div><div class="line">-keepclassmembers class ** &#123;</div><div class="line">    @org.greenrobot.eventbus.Subscribe &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line">-keep enum org.greenrobot.eventbus.ThreadMode &#123; *; &#125;</div><div class="line"></div><div class="line">#Gson</div><div class="line">-keep class com.crazyma.data.** &#123; *; &#125;</div></pre></td></tr></table></figure>
+<p><strong>小提醒</strong></p>
+<ol>
+<li>新版 <code>Okhttp3</code> 作者其實有說不用設定 protection (<a href="https://github.com/square/okhttp/issues/2230#issuecomment-212926355" target="_blank" rel="external">reference</a>) ，但是因為 Picasso 目前預設還是會使用到 <code>舊版 okhttp</code> 內容，所以還是需要寫進來</li>
+<li><code>Gson part</code> 要保護的不是 gson library，而是 <strong>‘你要用 Gson 進行轉換的那些 data class’</strong> (如果你稍微了解的話，就會知道 Gson 裡面就是一堆 Reflection)</li>
+<li>另外我也有愛使用 <code>RxJava2</code>，舊版的 RxJava 也需要寫 ProGuard Rules，但是 <code>RxJava2</code> 目前看來是不太需要(<a href="https://github.com/artem-zinnatullin/RxJavaProGuardRules#note-about-rxjava-2x" target="_blank" rel="external">reference</a>)</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.ma.beibeilab.com/proguard-rules/" data-id="cj2lnhme600064yvlhbe875zk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ProGuard/">ProGuard</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/android-version-rule/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          The Rules of Android VersionName &amp; VersionCode
+        
+      </div>
+    </a>
+  
+  
+    <a href="/ignore-tracked-files/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在 git 中取消追蹤檔案 | Ignore tracked files in git</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

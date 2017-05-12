@@ -5,24 +5,18 @@
   
   <title>How to remove toolbar shadow / 去除 Toolbar 的陰影 | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:[方法1]  將 AppBarLayout 的 elevation設為 0
-此作法會除掉上下陰影
-12345678910111213141516171819202122232">
+  <meta name="description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to remove toolbar shadow / 去除 Toolbar 的陰影">
 <meta property="og:url" content="http://blog.ma.beibeilab.com/shadow/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:[方法1]  將 AppBarLayout 的 elevation設為 0
-此作法會除掉上下陰影
-12345678910111213141516171819202122232">
+<meta property="og:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:">
 <meta property="og:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-133533.png">
 <meta property="og:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-135523.png">
-<meta property="og:updated_time" content="2017-04-11T07:16:08.000Z">
+<meta property="og:updated_time" content="2017-04-19T12:18:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to remove toolbar shadow / 去除 Toolbar 的陰影">
-<meta name="twitter:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:[方法1]  將 AppBarLayout 的 elevation設為 0
-此作法會除掉上下陰影
-12345678910111213141516171819202122232">
+<meta name="twitter:description" content="設計 Android 介面時，經常會使用到 CoordinatorLayout, ToolBar &amp;amp; Toolbar 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)這裡提出幾個解決方法:">
 <meta name="twitter:image" content="http://blog.ma.beibeilab.com/shadow/device-2017-04-11-133533.png">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
@@ -102,7 +96,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>設計 Android 介面時，經常會使用到 <code>CoordinatorLayout</code>, <code>ToolBar</code> &amp; <code>Toolbar</code> 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)<br><br><br><img src="/shadow/device-2017-04-11-133533.png" width="538" height="136" title="XDDDd"><br><br><br>這裡提出幾個解決方法:<br><br><br><strong>[方法1]  將 AppBarLayout 的 elevation設為 0</strong></p>
+        <p>設計 Android 介面時，經常會使用到 <code>CoordinatorLayout</code>, <code>ToolBar</code> &amp; <code>Toolbar</code> 來建立頁面，但有時候你會不小心弄出這樣子的 ToolBar (上下都會有陰影)<br><br><br><img src="/shadow/device-2017-04-11-133533.png" width="538" height="136" title="XDDDd"><br><br><br>這裡提出幾個解決方法:<br><a id="more"></a><br><br><br><strong>[方法1]  將 AppBarLayout 的 elevation設為 0</strong></p>
 <p>此作法會除掉上下陰影</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">...</span></div><div class="line">    &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">app:elevation</span>=<span class="string">"0dp"</span></div><div class="line">        <span class="attr">...</span></div><div class="line">        &gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span></div><div class="line">            <span class="attr">...</span></div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div><div class="line">```q</div><div class="line"><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">&#123;% img /shadow/device-2017-04-11-134158.png 539 125 %&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">br</span>&gt;</span></div><div class="line">**[方法2]  remove `android:windowDrawsSystemBarBackgrounds`**</div><div class="line">此參數就是通知系統：由我們自己決定 status bar 的顏色。</div><div class="line">通常是為了給有 `DrawerLayout` 的**OverLay Status Bar** 之效果使用。如果你沒有要使用，則可以直接移除</div><div class="line"></div><div class="line">``` xml</div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme.NoActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"windowActionBar"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- remove these 2 lines below    --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowDrawsSystemBarBackgrounds"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:statusBarColor"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><br><br><img src="/shadow/device-2017-04-11-135523.png" width="540" height="125"><br><br></p>
@@ -119,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.ma.beibeilab.com/shadow/" data-id="cj1fvfwuv0005gevlb9b8hr36" class="article-share-link">Share</a>
+      <a data-url="http://blog.ma.beibeilab.com/shadow/" data-id="cj2lnhme700074yvlbgzculkd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Toolbar/">Toolbar</a></li></ul>
@@ -168,7 +162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bintray/">Bintray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toolbar/">Toolbar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitignore/">gitignore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/library/">library</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smalltalk/">smalltalk</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bintray/">Bintray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProGuard/">ProGuard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Semantic-Versioning/">Semantic Versioning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toolbar/">Toolbar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitignore/">gitignore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/library/">library</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smalltalk/">smalltalk</a></li></ul>
     </div>
   </div>
 
@@ -178,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Bintray/" style="font-size: 10px;">Bintray</a> <a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a> <a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/library/" style="font-size: 10px;">library</a> <a href="/tags/smalltalk/" style="font-size: 10px;">smalltalk</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Bintray/" style="font-size: 10px;">Bintray</a> <a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a> <a href="/tags/ProGuard/" style="font-size: 10px;">ProGuard</a> <a href="/tags/Semantic-Versioning/" style="font-size: 10px;">Semantic Versioning</a> <a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/library/" style="font-size: 10px;">library</a> <a href="/tags/smalltalk/" style="font-size: 10px;">smalltalk</a>
     </div>
   </div>
 
@@ -187,7 +181,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
     </div>
   </div>
 
@@ -200,6 +194,14 @@
       <ul>
         
           <li>
+            <a href="/android-version-rule/">The Rules of Android VersionName &amp; VersionCode</a>
+          </li>
+        
+          <li>
+            <a href="/proguard-rules/">My ProGuard Rules</a>
+          </li>
+        
+          <li>
             <a href="/ignore-tracked-files/">在 git 中取消追蹤檔案 | Ignore tracked files in git</a>
           </li>
         
@@ -209,10 +211,6 @@
         
           <li>
             <a href="/shadow/">How to remove toolbar shadow / 去除 Toolbar 的陰影</a>
-          </li>
-        
-          <li>
-            <a href="/hello-world-again/">Hello World Again</a>
           </li>
         
       </ul>
