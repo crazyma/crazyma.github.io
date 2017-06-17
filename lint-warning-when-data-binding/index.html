@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: JCenter | Bunun Engineer&#39;s Blog</title>
+  <title>使用 Data Binding 遇到 Lint 報錯 | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bunun Engineer's Blog">
-<meta property="og:url" content="http://blog.ma.beibeilab.com/tags/JCenter/index.html">
+  <meta name="description" content="當使用 Data Binding 的 `@BindingAdapter 的時候lint 會回報一些 warning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Data Binding 遇到 Lint 報錯">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/lint-warning-when-data-binding/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta property="og:description" content="當使用 Data Binding 的 `@BindingAdapter 的時候lint 會回報一些 warning">
+<meta property="og:updated_time" content="2017-06-01T10:08:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bunun Engineer's Blog">
-<meta name="twitter:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta name="twitter:title" content="使用 Data Binding 遇到 Lint 報錯">
+<meta name="twitter:description" content="當使用 Data Binding 的 `@BindingAdapter 的時候lint 會回報一些 warning">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
   
@@ -66,40 +67,75 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/upload-library-to-bintray/" class="archive-article-date">
-  <time datetime="2017-04-12T15:26:42.000Z" itemprop="datePublished">Apr 12</time>
+        <section id="main"><article id="post-lint-warning-when-data-binding" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/lint-warning-when-data-binding/" class="article-date">
+  <time datetime="2017-06-01T09:55:06.000Z" itemprop="datePublished">2017-06-01</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AndroidDev/">AndroidDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/upload-library-to-bintray/">Upload Library to Bintray(JCenter) | 上傳自己的 Library 至 Bintray(JCenter)</a>
+    <h1 class="article-title" itemprop="name">
+      使用 Data Binding 遇到 Lint 報錯
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>當使用 Data Binding 的 <code>`@BindingAdapter</code> 的時候<br>lint 會回報一些 warning<br><a id="more"></a></p>
+<h2 id="Issue-1"><a href="#Issue-1" class="headerlink" title="Issue 1"></a>Issue 1</h2><h3 id="Application-namespace-for-attribute-app-leftMessage-will-be-ignored"><a href="#Application-namespace-for-attribute-app-leftMessage-will-be-ignored" class="headerlink" title="Application namespace for attribute app:leftMessage will be ignored."></a>Application namespace for attribute app:leftMessage will be ignored.</h3><p>這個問題是因為使用 <code>prefix</code>, 移掉就可以</p>
+<h3 id="錯誤寫法"><a href="#錯誤寫法" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@BindingAdapter</span>(<span class="string">"bind:marginTop"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setMarginTop</span><span class="params">(View view, <span class="keyword">float</span> padding)</span> </span>&#123;</div><div class="line">  <span class="comment">//  ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="正確寫法"><a href="#正確寫法" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@BindingAdapter</span>(<span class="string">"marginTop"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setMarginTop</span><span class="params">(View view, <span class="keyword">float</span> padding)</span> </span>&#123;</div><div class="line">  <span class="comment">//  ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><br></p>
+<hr>
+<h2 id="Issue-2"><a href="#Issue-2" class="headerlink" title="Issue 2"></a>Issue 2</h2><h3 id="Method-references-using-‘-’-is-deprecated"><a href="#Method-references-using-‘-’-is-deprecated" class="headerlink" title="Method references using ‘.’ is deprecated"></a>Method references using ‘.’ is deprecated</h3><p>常發生在呼叫 listener 的時候，請改用 <code>::</code></p>
+<h3 id="錯誤寫法-1"><a href="#錯誤寫法-1" class="headerlink" title="錯誤寫法"></a>錯誤寫法</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:onClick="@&#123;click.onActionButtonClick&#125;"</div></pre></td></tr></table></figure>
+<h3 id="正確寫法-1"><a href="#正確寫法-1" class="headerlink" title="正確寫法"></a>正確寫法</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:onClick="@&#123;click::onActionButtonClick&#125;"</div></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.ma.beibeilab.com/lint-warning-when-data-binding/" data-id="cj40vfi8w0005qmvl3rq6zuxb" class="article-share-link">Share</a>
+      
+        <a href="http://blog.ma.beibeilab.com/lint-warning-when-data-binding/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Binding/">Data Binding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lint/">Lint</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/android-version-rule/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">The Rules of Android VersionName &amp; VersionCode</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -198,11 +234,13 @@
 <script>
   var disqus_shortname = 'blog-ma-beibeilab-com';
   
+  var disqus_url = 'http://blog.ma.beibeilab.com/lint-warning-when-data-binding/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
