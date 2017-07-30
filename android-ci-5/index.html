@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name | Bunun Engineer&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="對於目前的 CI 設定，還有一些額外的需求
+
+希望方便管理我的 VersionCode &amp;amp; VersionName
+希望可以讓 apk file name 可以有目前版號，以方便整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/android-ci-5/index.html">
+<meta property="og:site_name" content="Bunun Engineer's Blog">
+<meta property="og:description" content="對於目前的 CI 設定，還有一些額外的需求
+
+希望方便管理我的 VersionCode &amp;amp; VersionName
+希望可以讓 apk file name 可以有目前版號，以方便整理">
+<meta property="og:updated_time" content="2017-07-30T15:41:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name">
+<meta name="twitter:description" content="對於目前的 CI 設定，還有一些額外的需求
+
+希望方便管理我的 VersionCode &amp;amp; VersionName
+希望可以讓 apk file name 可以有目前版號，以方便整理">
+  
+    <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Bunun Engineer&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Everything in my develop life</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.ma.beibeilab.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-android-ci-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/android-ci-5/" class="article-date">
+  <time datetime="2017-07-10T15:36:35.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AndroidDev/">AndroidDev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>對於目前的 CI 設定，還有一些額外的需求</p>
+<ol>
+<li>希望方便管理我的 VersionCode &amp; VersionName</li>
+<li>希望可以讓 apk file name 可以有目前版號，以方便整理</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h2 id="1-VersionCode-amp-VersionName"><a href="#1-VersionCode-amp-VersionName" class="headerlink" title="1. VersionCode &amp; VersionName"></a>1. VersionCode &amp; VersionName</h2><h3 id="a-Version-的命名"><a href="#a-Version-的命名" class="headerlink" title="a. Version 的命名"></a>a. Version 的命名</h3><p>關於 VersionCode 的命名規則，我是參考:</p>
+<blockquote>
+<ul>
+<li><a href="http://blog.ma.beibeilab.com/android-version-rule/">The Rules of Android VersionName &amp; VersionCode</a></li>
+</ul>
+<p>這個方法的另一個好處是，可以輕易從 versioncode 知道是哪個 branch(dev, staging, production)</p>
+</blockquote>
+<h3 id="b-建立-version-properties"><a href="#b-建立-version-properties" class="headerlink" title="b. 建立 version.properties"></a>b. 建立 version.properties</h3><blockquote>
+<p>此檔案紀錄各個 branch(dev, staging, production)的版號</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">version_dev=1.0.1-SNAPSHOT</div><div class="line">version_staging=1.0.1-RC1</div><div class="line">version_production=1.0.0</div></pre></td></tr></table></figure>
+<h3 id="c-編輯-build-gradle"><a href="#c-編輯-build-gradle" class="headerlink" title="c. 編輯 build.gradle"></a>c. 編輯 build.gradle</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">def</span> versionPropsFile = rootProject.<span class="keyword">file</span>(<span class="string">'version.properties'</span>)</div><div class="line">    <span class="keyword">if</span> (versionPropsFile.canRead()) &#123;</div><div class="line">        <span class="keyword">def</span> Properties versionProps = <span class="keyword">new</span> Properties()</div><div class="line">        versionProps.load(<span class="keyword">new</span> FileInputStream(versionPropsFile))</div><div class="line">        <span class="keyword">def</span> defVersionName = versionProps[<span class="string">'version_dev'</span>]</div><div class="line">        <span class="comment">/* in staging branch    */</span></div><div class="line">        <span class="comment">// def defVersionName = versionProps['version_staging']</span></div><div class="line">        <span class="comment">/*  in production branch    */</span></div><div class="line">        <span class="comment">// def defVersionName = versionProps['version_production']</span></div><div class="line"></div><div class="line">        <span class="keyword">def</span> candidate = <span class="string">"99"</span></div><div class="line">        <span class="keyword">def</span> (major, minor, patch) = defVersionName.toLowerCase().replaceAll(<span class="string">'-'</span>, <span class="string">''</span>).<span class="keyword">tokenize</span>(<span class="string">'.'</span>)</div><div class="line">        <span class="keyword">if</span> (patch.endsWith(<span class="string">"snapshot"</span>)) &#123;</div><div class="line">            candidate = <span class="string">"0"</span></div><div class="line">            patch = patch.replaceAll(<span class="string">"[^0-9]"</span>, <span class="string">""</span>)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">def</span> rc</div><div class="line">            (patch, rc) = patch.<span class="keyword">tokenize</span>(<span class="string">"rc"</span>)</div><div class="line">            <span class="keyword">if</span> (rc) &#123;</div><div class="line">                candidate = rc</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        (major, minor, patch, candidate) = [major, minor, patch, candidate].<span class="keyword">collect</span> &#123;</div><div class="line">            it.<span class="keyword">toInteger</span>()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">def</span> defVersionCode = (major * <span class="number">1000000</span>) + (minor * <span class="number">10000</span>) + (patch * <span class="number">100</span>) + candidate;</div><div class="line"></div><div class="line">        defaultConfig &#123;</div><div class="line">            applicationId <span class="string">"com.sprout.gitlabcisample"</span></div><div class="line">            minSdkVersion <span class="number">16</span></div><div class="line">            targetSdkVersion <span class="number">25</span></div><div class="line">            versionCode defVersionCode    <span class="comment">//    EDIT</span></div><div class="line">            versionName defVersionName    <span class="comment">//    EDIT</span></div><div class="line">            testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>這段 code 會產生兩個變數: <code>defVersionName</code> &amp; <code>defVersionCode</code>，並在 <code>defaultConfig</code> 設定</p>
+<hr>
+<h2 id="2-Change-Apk-Name"><a href="#2-Change-Apk-Name" class="headerlink" title="2. Change Apk Name"></a>2. Change Apk Name</h2><p>編輯 gradle<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">buildTypes &#123;</div><div class="line">    debug &#123;</div><div class="line">        applicationVariants.all &#123; variant -&gt;</div><div class="line">            variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</div><div class="line">                output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(output.outputFile.parent,</div><div class="line">                        output.outputFile.name.replace(<span class="string">"-debug"</span>, <span class="string">"-"</span> + defVersionName));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    release &#123;</div><div class="line">        ...</div><div class="line">        applicationVariants.all &#123; variant -&gt;</div><div class="line">            variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</div><div class="line">                output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(output.outputFile.parent,</div><div class="line">                        output.outputFile.name.replace(<span class="string">"-release"</span>, <span class="string">"-"</span> + defVersionName));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="完整修改-結合-1-amp-2"><a href="#完整修改-結合-1-amp-2" class="headerlink" title="完整修改 (結合 1. &amp; 2. )"></a>完整修改 (結合 1. &amp; 2. )</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    compileSdkVersion <span class="number">25</span></div><div class="line">    buildToolsVersion <span class="string">"25.0.2"</span></div><div class="line">    <span class="keyword">def</span> versionPropsFile = rootProject.<span class="keyword">file</span>(<span class="string">'version.properties'</span>)</div><div class="line">    <span class="keyword">if</span> (versionPropsFile.canRead()) &#123;</div><div class="line">        <span class="keyword">def</span> Properties versionProps = <span class="keyword">new</span> Properties()</div><div class="line">        versionProps.load(<span class="keyword">new</span> FileInputStream(versionPropsFile))</div><div class="line">        <span class="keyword">def</span> defVersionName = versionProps[<span class="string">'version_dev'</span>]</div><div class="line">        <span class="comment">/* in staging branch    */</span></div><div class="line">        <span class="comment">// def defVersionName = versionProps['version_staging']</span></div><div class="line">        <span class="comment">/*  in production branch    */</span></div><div class="line">        <span class="comment">// def defVersionName = versionProps['version_production']</span></div><div class="line"></div><div class="line">        <span class="keyword">def</span> candidate = <span class="string">"99"</span></div><div class="line">        <span class="keyword">def</span> (major, minor, patch) = defVersionName.toLowerCase().replaceAll(<span class="string">'-'</span>, <span class="string">''</span>).<span class="keyword">tokenize</span>(<span class="string">'.'</span>)</div><div class="line">        <span class="keyword">if</span> (patch.endsWith(<span class="string">"snapshot"</span>)) &#123;</div><div class="line">            candidate = <span class="string">"0"</span></div><div class="line">            patch = patch.replaceAll(<span class="string">"[^0-9]"</span>, <span class="string">""</span>)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">def</span> rc</div><div class="line">            (patch, rc) = patch.<span class="keyword">tokenize</span>(<span class="string">"rc"</span>)</div><div class="line">            <span class="keyword">if</span> (rc) &#123;</div><div class="line">                candidate = rc</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        (major, minor, patch, candidate) = [major, minor, patch, candidate].<span class="keyword">collect</span> &#123;</div><div class="line">            it.<span class="keyword">toInteger</span>()</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">def</span> defVersionCode = (major * <span class="number">1000000</span>) + (minor * <span class="number">10000</span>) + (patch * <span class="number">100</span>) + candidate;</div><div class="line">        defaultConfig &#123;</div><div class="line">            applicationId <span class="string">"com.sprout.gitlabcisample"</span></div><div class="line">            minSdkVersion <span class="number">16</span></div><div class="line">            targetSdkVersion <span class="number">25</span></div><div class="line">            versionCode defVersionCode</div><div class="line">            versionName defVersionName</div><div class="line">            testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></div><div class="line">        &#125;</div><div class="line">        buildTypes &#123;</div><div class="line">            debug &#123;</div><div class="line">                applicationVariants.all &#123; variant -&gt;</div><div class="line">                    variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</div><div class="line">                        output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(output.outputFile.parent,</div><div class="line">                                output.outputFile.name.replace(<span class="string">"-debug"</span>, <span class="string">"-"</span> + defVersionName));</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            release &#123;</div><div class="line">                signingConfig signingConfigs.sign</div><div class="line">                minifyEnabled <span class="keyword">false</span></div><div class="line">                proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">                applicationVariants.all &#123; variant -&gt;</div><div class="line">                    variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</div><div class="line">                        output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(output.outputFile.parent,</div><div class="line">                                output.outputFile.name.replace(<span class="string">"-release"</span>, <span class="string">"-"</span> + defVersionName));</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.ma.beibeilab.com/android-ci-5/" data-id="cj5qwlvv40007g7vlfjmux8n9" class="article-share-link">Share</a>
+      
+        <a href="http://blog.ma.beibeilab.com/android-ci-5/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI/">CI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gitlab/">Gitlab</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/android-ci-6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在 Gitlab 上建立 Android CI - (6) Run no-window emulator
+        
+      </div>
+    </a>
+  
+  
+    <a href="/android-ci-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在 Gitlab 上建立 Android CI - (4) 在 CI 產生 Signed APK</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AndroidDev/">AndroidDev</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dev/">Dev</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bintray/">Bintray</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Binding/">Data Binding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitlab/">Gitlab</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JCenter/">JCenter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lint/">Lint</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ProGuard/">ProGuard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Semantic-Versioning/">Semantic Versioning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toolbar/">Toolbar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitignore/">gitignore</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/library/">library</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smalltalk/">smalltalk</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Bintray/" style="font-size: 10px;">Bintray</a> <a href="/tags/CI/" style="font-size: 15px;">CI</a> <a href="/tags/Data-Binding/" style="font-size: 10px;">Data Binding</a> <a href="/tags/Gitlab/" style="font-size: 15px;">Gitlab</a> <a href="/tags/JCenter/" style="font-size: 10px;">JCenter</a> <a href="/tags/Lint/" style="font-size: 10px;">Lint</a> <a href="/tags/ProGuard/" style="font-size: 10px;">ProGuard</a> <a href="/tags/Semantic-Versioning/" style="font-size: 10px;">Semantic Versioning</a> <a href="/tags/Toolbar/" style="font-size: 10px;">Toolbar</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitignore/" style="font-size: 10px;">gitignore</a> <a href="/tags/library/" style="font-size: 10px;">library</a> <a href="/tags/smalltalk/" style="font-size: 10px;">smalltalk</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/android-ci-6/">在 Gitlab 上建立 Android CI - (6) Run no-window emulator</a>
+          </li>
+        
+          <li>
+            <a href="/android-ci-5/">在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name</a>
+          </li>
+        
+          <li>
+            <a href="/android-ci-4/">在 Gitlab 上建立 Android CI - (4) 在 CI 產生 Signed APK</a>
+          </li>
+        
+          <li>
+            <a href="/android-ci-3/">在 Gitlab 上建立 Android CI - (3) 調整 script</a>
+          </li>
+        
+          <li>
+            <a href="/android-ci-2/">在 Gitlab 上建立 Android CI - (2) 設定 CI script</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Crazyma/David Ma<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blog-ma-beibeilab-com';
+  
+  var disqus_url = 'http://blog.ma.beibeilab.com/android-ci-5/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
