@@ -3,17 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Gitlab | Bunun Engineer&#39;s Blog</title>
+  <title>在模擬器中使用指紋辨識 | Bunun Engineer&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bunun Engineer's Blog">
-<meta property="og:url" content="http://blog.ma.beibeilab.com/tags/Gitlab/index.html">
+  <meta name="description" content="簡單紀錄一下要如何使用指紋辨識">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在模擬器中使用指紋辨識">
+<meta property="og:url" content="http://blog.ma.beibeilab.com/simulator-fingerprint/index.html">
 <meta property="og:site_name" content="Bunun Engineer's Blog">
-<meta property="og:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta property="og:description" content="簡單紀錄一下要如何使用指紋辨識">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/simulator-fingerprint/Screenshot_1511857225.png">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/simulator-fingerprint/Screenshot_1511857449.png">
+<meta property="og:image" content="http://blog.ma.beibeilab.com/simulator-fingerprint/Screenshot_1511858373.png">
+<meta property="og:updated_time" content="2017-11-28T08:42:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bunun Engineer's Blog">
-<meta name="twitter:description" content="I&apos;m an Android Developer from a samll Bunun community in the middle of Taiwan. This website would record all my develop note or maybe a few of my dialy life. Hope you would love it. Uninang mihumisang">
+<meta name="twitter:title" content="在模擬器中使用指紋辨識">
+<meta name="twitter:description" content="簡單紀錄一下要如何使用指紋辨識">
+<meta name="twitter:image" content="http://blog.ma.beibeilab.com/simulator-fingerprint/Screenshot_1511857225.png">
   
     <link rel="alternate" href="/atom.xml" title="Bunun Engineer&#39;s Blog" type="application/atom+xml">
   
@@ -66,135 +71,78 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-6/" class="archive-article-date">
-  <time datetime="2017-07-15T15:48:54.000Z" itemprop="datePublished">Jul 15</time>
+        <section id="main"><article id="post-simulator-fingerprint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/simulator-fingerprint/" class="article-date">
+  <time datetime="2017-11-28T08:16:06.000Z" itemprop="datePublished">2017-11-28</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Dev/">Dev</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-6/">在 Gitlab 上建立 Android CI - (6) Run no-window emulator</a>
+    <h1 class="article-title" itemprop="name">
+      在模擬器中使用指紋辨識
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-5/" class="archive-article-date">
-  <time datetime="2017-07-10T15:36:35.000Z" itemprop="datePublished">Jul 10</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-5/">在 Gitlab 上建立 Android CI - (5) 設定 App Version and Apk File Name</a>
-    </h1>
-  
+        <p>簡單紀錄一下要如何使用指紋辨識<br><a id="more"></a></p>
+<h3 id="Step-0"><a href="#Step-0" class="headerlink" title="Step 0"></a>Step 0</h3><p>確認有安裝 <code>Android SDK Tools Revistion 24.3</code> 以上的板本</p>
+<h3 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h3><p>啟用 Screen Lock</p>
+<img src="/simulator-fingerprint/Screenshot_1511857225.png" width="288" height="162">
+<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h3><p>進入新增 Fingerprint 的畫面</p>
+<img src="/simulator-fingerprint/Screenshot_1511857449.png" width="288" height="162">
+<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h3><p>輸入指令：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb -e emu finger touch &lt;自取ID&gt;</div></pre></td></tr></table></figure></p>
+<p>如此就設定完一個指紋</p>
+<hr>
+<p>之後再需要指紋的地方，輸入上述一樣的指令通過辨識囉~</p>
+<img src="/simulator-fingerprint/Screenshot_1511858373.png" width="288" height="162">
+<p><br></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-4/" class="archive-article-date">
-  <time datetime="2017-07-07T15:17:49.000Z" itemprop="datePublished">Jul 7</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-4/">在 Gitlab 上建立 Android CI - (4) 在 CI 產生 Signed APK</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-3/" class="archive-article-date">
-  <time datetime="2017-07-03T14:57:12.000Z" itemprop="datePublished">Jul 3</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.ma.beibeilab.com/simulator-fingerprint/" data-id="cjajcoef8000xa0vlocgrishj" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-3/">在 Gitlab 上建立 Android CI - (3) 調整 script</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-2/" class="archive-article-date">
-  <time datetime="2017-07-01T14:31:58.000Z" itemprop="datePublished">Jul 1</time>
-</a>
+        <a href="http://blog.ma.beibeilab.com/simulator-fingerprint/#disqus_thread" class="article-comment-link">Comments</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-2/">在 Gitlab 上建立 Android CI - (2) 設定 CI script</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/android-ci-1/" class="archive-article-date">
-  <time datetime="2017-06-26T03:10:30.000Z" itemprop="datePublished">Jun 26</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/android-ci-1/">在 Gitlab 上建立 Android CI - (1) 設定 Runner</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AVD/">AVD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Simulator/">Simulator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adb/">adb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fingerprint/">fingerprint</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/android-ci-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在 Gitlab 上建立 Android CI - (6) Run no-window emulator</div>
+    </a>
   
+</nav>
 
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -293,11 +241,13 @@
 <script>
   var disqus_shortname = 'blog-ma-beibeilab-com';
   
+  var disqus_url = 'http://blog.ma.beibeilab.com/simulator-fingerprint/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
